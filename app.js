@@ -4,13 +4,14 @@ var app = express();
 var data;
 var fs = require('fs');
 //讀外部文件 我也不知道要放什麼
-var send_item = fs.readFileSync('Test.txt', 'utf8');
+var send_item;// = fs.readFileSync('Test.txt', 'utf8');
 var lengthtoGate = 0;
 var lengthtoFCourt = 0;
 var lengthtoTSMC = 0;
 var lengthtoLife = 0;
 
 app.get('/',(req,res)=>{
+    
     request('https://iot.martinintw.com/api/v1/data/12345617',(err,response,body)=>{
         var a = JSON.parse(body);
         send_item = fs.readFileSync('Test.txt', 'utf8');
@@ -43,8 +44,9 @@ app.get('/',(req,res)=>{
                 //process.exit(0);
             }
         }
+        res.send(send_item);
     });
-    res.send(send_item);
+    
 });
 
 var port = 8080;
