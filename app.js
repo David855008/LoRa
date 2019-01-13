@@ -9,14 +9,17 @@ var lengthtoGate = 0;
 var lengthtoFCourt = 0;
 var lengthtoTSMC = 0;
 var lengthtoLife = 0;
-
+var totaldistance = 0;
+var cur = 0;
+var pre = 0;
 app.get('/', (req, res) => {
-
     request('https://iot.martinintw.com/api/v1/data/12345617', (err, response, body) => {
         var a = JSON.parse(body);
         send_item = fs.readFileSync('Test.html', 'utf8');
         for (var i = a.length - 1; i >= 0; i--) {
             if (a[i].lat != "") {
+                cur=i;
+                pre = i;
                 data = a[i];
                 send_item = send_item.replace(/created_at/, a[i]['created_at']);
                 send_item = send_item.replace(/lat/, a[i]['lat']);
@@ -44,10 +47,22 @@ app.get('/', (req, res) => {
                 }
                 send_item = send_item.replace(/url_map/, 'https://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=' + a[i]['lat'] + ',' + a[i]['lng'] + '&z=16&output=embed&t=');
                 break;
-
-
+            }
+            
+        }
+        send_item = send_item.replace(/numberofdata/, a.length);
+        for (var i = a.length - 1; i >= 0; i--) {
+            if(i!=cur&&a[i].lat != ""){
+                totaldistance += getDistance(a[i]['lat'], a[i]['lng'], a[pre]['lat'], a[pre]['lng']);
+                pre = i;
+            }
+            if(i == 0){
+                send_item = send_item.replace(/firstcreatetime/, a[i]['created_at']);
+                send_item = send_item.replace(/firstcreatelat/, a[i]['lat']);
+                send_item = send_item.replace(/firstcreatelng/, a[i]['lng']);
             }
         }
+        send_item = send_item.replace(/totaldistance/, Math.floor(totaldistance)/1000);
         res.send(send_item);
         //process.exit(0);
     });

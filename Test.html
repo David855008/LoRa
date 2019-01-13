@@ -9,20 +9,38 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
         crossorigin="anonymous">
-
+        <style type="text/css">
+            .tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;}
+            .tg td{font-family:Arial, sans-serif;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;}
+            .tg th{font-family:Arial, sans-serif;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;}
+            .tg .tg-a2cf{font-weight:bold;font-family:Arial, Helvetica, sans-serif !important;;text-align:center;vertical-align:top}
+            .tg .tg-804w{font-family:Arial, Helvetica, sans-serif !important;;text-align:center;vertical-align:top}
+            .tg .tg-amv1{background-color:#FCFBE3;font-family:Arial, Helvetica, sans-serif !important;;text-align:center;vertical-align:top}
+            .tg .tg-rnhl{font-weight:bold;font-family:"Arial Black", Gadget, sans-serif !important;;text-align:center;vertical-align:top}
+            body {
+                background-image: url("https://s22294.pcdn.co/wp-content/uploads/scales-pattern1.jpg");
+            }
+        </style>
 </head>
 
 <body onload="$('#myModal').modal()">
-    <div class="container">
-        <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-            <a class="navbar-brand" href="http://localhost:8080/">
-                <img src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30"
-                    class="d-inline-block align-top" alt="">
-                <font size="5"><b>NTHU SchoolBus Location</b></font>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href="http://affairs.web.nthu.edu.tw/files/14-1011-149968,r1065-1.php?Lang=zh-tw"
-                    target="view_window">[公車時刻表]</a>
-                <br>
-            </a>
+    <div class="container" >
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #e3f2fd;">
+            <img src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" vertical-align:middle width="30"
+                height="30" class="d-inline-block align-top" alt="">
+            <a class="navbar-brand" href="http://localhost:8080/">NTHU SchoolBus Location</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active" href="http://localhost:8080/">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" target="view_window" href="http://affairs.web.nthu.edu.tw/files/14-1011-149968,r1065-1.php?Lang=zh-tw">Timetable</a>
+                    <a class="nav-item nav-link" target="view_window" href="http://affairs.web.nthu.edu.tw/files/40-1011-1065-1.php">Announcement</a>
+                    <a class="nav-item nav-link" target="view_window" href="http://affairs.web.nthu.edu.tw/files/11-1011-2750.php?Lang=zh-tw">Support</a>
+                </div>
+            </div>
         </nav>
 
         <div class="modal fade" id="myModal" role="dialog">
@@ -46,11 +64,10 @@
             </div>
         </div>
 
-
         Last updated at : created_at<br>
         經度 : lat<br>
         緯度 : lng<br>
-        <table style="border:3px #cccccc solid;" cellpadding="10" border='1'>
+        <table class="tg" style="border:3px #cccccc solid;" cellpadding="10" border='1'>
             <tr>
                 <th>距離</th>
                 <th>校門口</th>
@@ -67,8 +84,13 @@
             </tr>
         </table>
         <hr>
-        <iframe width='1200px' height='60%' frameborder='0' scrolling='yes' marginheight='0' marginwidth='0' src=url_map
+        <iframe width='100%' height='60%' frameborder='0' scrolling='yes' marginheight='0' marginwidth='0' src=url_map
             style="border: 5px dotted green;"></iframe>
+        <hr>
+        <p>[資料分析]</p>
+        總共收到numberofdata筆資料，<br>
+        最早一筆是firstcreatetime，從(firstcreatelat,firstcreatelng)發出。<br>
+        校車目前跑了totaldistance公里。辛苦了！
     </div>
 </body>
 
