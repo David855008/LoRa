@@ -14,7 +14,7 @@ app.get('/',(req,res)=>{
     
     request('https://iot.martinintw.com/api/v1/data/12345617',(err,response,body)=>{
         var a = JSON.parse(body);
-        send_item = fs.readFileSync('Test.txt', 'utf8');
+        send_item = fs.readFileSync('Test.html', 'utf8');
         for(var i = a.length-1;i>=0;i--){
             if(a[i].lat!=""){
                 data = a[i];
@@ -32,21 +32,22 @@ app.get('/',(req,res)=>{
                 </table>";
 
                 //經緯度判斷校巴在校內校外
-                if(a[i]['lat']<24.796296&&a[i]['lat']>24.786054&&a[i]['lng']<120.998404&&a[i]['lng']>120.987770)send_item += "校巴在學校裡面!"+"<br>";
-                else send_item +=  "<font size=\"5\" color=\"red\">校巴在學校外面!</font>"+"<br>";
+                if(a[i]['lat']<24.796296&&a[i]['lat']>24.786054&&a[i]['lng']<120.998404&&a[i]['lng']>120.987770)send_item = send_item.replace(/TextToShow/,"校巴在學校裡面!");//send_item += "校巴在學校裡面!"+"<br>";
+                else send_item = send_item.replace(/TextToShow/,"<font size=\"5\" color=\"red\">校巴在學校外面!</font>");//send_item +=  "<font size=\"5\" color=\"red\">校巴在學校外面!</font>"+"<br>";
                 //Google Map顯示
-                send_item+="<iframe width='60%' height='60%' frameborder='0' scrolling='yes' marginheight='0' marginwidth='0'\
+                send_item+="<iframe width='1200px' height='60%' frameborder='0' scrolling='yes' marginheight='0' marginwidth='0'\
                     src='https://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q="
                     +a[i]['lat']+","+a[i]['lng']+"&z=16&output=embed&t='></iframe>"
-
+ 
                 break;
                 
-                //process.exit(0);
+                
             }
         }
+        send_item+="</body>";
         res.send(send_item);
+        process.exit(0);
     });
-    
 });
 
 var port = 8080;
